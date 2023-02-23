@@ -4,35 +4,39 @@ var game_state = "initial"
 var boundaries = document.getElementsByClassName("boundary")
 var game_container = document.getElementById("game")
 
+var playerX , playerY
 
-function notTouching1(x , y){
-    return (x > 152 || y > 201)
+
+function notTouching1(){
+    return (playerX > 152 || playerY > 201)
 }
 
-function notTouching2(x , y){
-    return (y < 235)
+function notTouching2(){
+    return (playerY < 235)
 }
 
-function notTouching3(x,y){
-    return y > 50
+function notTouching3(){
+    return playerY > 50
 }
 
-function notTouching4(x,y){
-    return (x < 192 || x > 301) || y < 85
+function notTouching4(){
+    return (playerX < 192 || playerX > 301) || playerY < 85
 }
 
-function notTouching5(x,y){
-    return (x < 340 && y < 200) || y>201
+function notTouching5(){
+    return (playerX < 340 && playerX < 200) || playerY > 201
 }
+
+
 
 game_container.addEventListener("mousemove" , 
     function(e) {
-        var x = e.offsetX;
-        var y = e.offsetY;
-        if(notTouching4(x,y)){
-            console.log("nt "+x+","+y)
+        playerX = e.offsetX;
+        playerY = e.offsetY;
+        if(notTouching2()){
+            console.log("nt "+playerX+","+playerY)
         }else{
-            console.log("t "+x+","+y)
+            console.log("t "+playerX+","+playerY)
         }
     }
 )
