@@ -102,6 +102,8 @@ neighboring elements.  Necessary to avoid giving ids to the boundary divs
 	width: 498px;
 }
 
+
+
 #game div.boundary + div.boundary + div.boundary + div.boundary + div.boundary {
 	border-bottom: none;
 	
@@ -110,3 +112,5 @@ neighboring elements.  Necessary to avoid giving ids to the boundary divs
 	height: 150px;
 	width: 98px;
 }
+
+

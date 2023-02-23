@@ -9,6 +9,19 @@ var game_state = "initial"
 var player_x , player_y, crossed_area=false;
 
 
+//styling
+function setBorders(color){
+    boundaries[0].style.borderRightColor = color;
+    boundaries[0].style.borderBottomColor = color;
+    boundaries[1].style.borderBottomColor = color;
+    boundaries[2].style.borderLeftColor = color;
+    boundaries[2].style.borderBottomColor = color;
+    boundaries[3].style.borderTopColor = color;
+    boundaries[4].style.borderRightColor = color;
+    boundaries[4].style.borderTopColor = color;
+    boundaries[4].style.borderLeftColor = color;
+}
+
 
 function notTouching1(){
     return player_x > 152 || player_y > 201
@@ -47,6 +60,7 @@ function setupRound(){
     game_state = "set"
     crossed_area = false
     status_prompt.innerText = "Don't Touch the Lines!!!"
+    setBorders("black")
 }
 
 function startRound(){
@@ -65,6 +79,11 @@ function looseGame(){
     console.log("dead")
     game_state = "over" ;
     status_prompt.innerText = "YOU LOOSE!"
+    setBorders("red")
+}
+
+function haltGame(){
+    game_state = "suspended"
 }
 
 game_container.addEventListener("mousemove" , 
@@ -78,6 +97,13 @@ game_container.addEventListener("mousemove" ,
                 console.log("alive")
             }
         }
+    }
+)
+
+
+game_container.addEventListener("mouseleave" ,
+    function(){
+        haltGame();
     }
 )
 
