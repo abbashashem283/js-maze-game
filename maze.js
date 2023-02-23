@@ -66,6 +66,11 @@ function setCoordinates(x,y){
     player_y = y;
 }
 
+function resetPosition(){
+    player_x = 0
+    player_y = 0
+}
+
 function setupRound(){
     game_state = "set"
     crossed_area = false
@@ -74,6 +79,8 @@ function setupRound(){
 }
 
 function startRound(){
+    crossed_area = false
+    resetPosition()
     game_state = "started"
 }
 
@@ -83,6 +90,7 @@ function winGame(){
         game_state = "finished"
         status_prompt.innerText = "YOU WIN!!!"
         setScore(score + 10)
+        crossed_area = false
     }
 }
 
@@ -92,6 +100,7 @@ function looseGame(){
     status_prompt.innerText = "YOU LOOSE!"
     setBorders("red")
     setScore(score - 10)
+    crossed_area = false;
 }
 
 function haltGame(){
