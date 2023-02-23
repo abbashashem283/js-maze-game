@@ -101,6 +101,14 @@ function haltGame(){
     }
 }
 
+
+function resetGame(){
+    game_state == "initial"
+    crossed_area = false
+    setScore(0)
+    setBorders("black")
+}
+
 game_container.addEventListener("mousemove" , 
     function(e) {
 
@@ -116,31 +124,17 @@ game_container.addEventListener("mousemove" ,
 )
 
 
-game_container.addEventListener("mouseleave" ,
-    function(){
-        haltGame();
-    }
-)
+game_container.addEventListener("mouseleave" , haltGame)
 
 
-start.addEventListener( "mouseenter" , 
-  function(){  
-     setupRound()
-  }
-)
+start.addEventListener( "mouseenter" , setupRound)
 
-start.addEventListener( "mouseleave" , 
-  function(){  
-     startRound()
-  }
-)
+start.addEventListener( "mouseleave" , startRound)
+
+start.addEventListener("click" , resetGame)
 
 
-end.addEventListener("mouseenter" , 
-  function(){
-    winGame()
-  }
-)
+end.addEventListener("mouseenter" , winGame)
 
 
 
