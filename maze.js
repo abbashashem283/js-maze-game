@@ -3,11 +3,21 @@ var end = document.getElementById("end")
 var status_prompt = document.getElementById("status")
 var boundaries = document.getElementsByClassName("boundary")
 var game_container = document.getElementById("game")
+var score_board = document.getElementsByClassName("example")[0]
 
 
 var game_state = "initial"
 var player_x , player_y, crossed_area=false;
+var score = 0;
 
+function setScore(s){
+    s = (s<0)?0:s
+    console.log(score_board)
+    score = s;
+    score_board.innerHTML = "<h2>"+score+"</h2>"
+}
+
+setScore(0)
 
 //styling
 function setBorders(color){
@@ -72,6 +82,7 @@ function winGame(){
         console.log("you win!!!")
         game_state = "finished"
         status_prompt.innerText = "YOU WIN!!!"
+        setScore(score + 10)
     }
 }
 
@@ -80,10 +91,14 @@ function looseGame(){
     game_state = "over" ;
     status_prompt.innerText = "YOU LOOSE!"
     setBorders("red")
+    setScore(score - 10)
 }
 
 function haltGame(){
-    game_state = "suspended"
+    if(game_state == "set" || game_state == "started"){ 
+        game_state = "suspended"
+        status_prompt.innerText = "ILLEGAL EXIT! Go back to S to restart";
+    }
 }
 
 game_container.addEventListener("mousemove" , 

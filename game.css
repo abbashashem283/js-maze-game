@@ -113,4 +113,11 @@ neighboring elements.  Necessary to avoid giving ids to the boundary divs
 	width: 98px;
 }
 
+.example{
+	text-align: center;
+}
 
+.example > h2{
+	margin: 0;
+	width: 100%;
+}
