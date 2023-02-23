@@ -1,30 +1,28 @@
 var start = document.getElementById("start")
+var end = document.getElementById("end")
 var status_prompt = document.getElementById("status")
-var game_state = "initial"
 var boundaries = document.getElementsByClassName("boundary")
 var game_container = document.getElementById("game")
 
+
+var game_state = "initial"
 var player_x , player_y, crossed_area=false;
 
 
 
 function notTouching1(){
-    console.log("1 nttt")
     return player_x > 152 || player_y > 201
 }
 
 function notTouching2(){
-    console.log("2 nttt")
     return player_y < 235
 }
 
 function notTouching3(){
-    console.log("3 nttt")
     return player_y > 50
 }
 
 function notTouching4(){
-    console.log("4 nttt")
     return (player_x < 192 || player_x > 301) || player_y < 85
 }
 
@@ -40,17 +38,45 @@ function playerSafe(){
 function setCoordinates(x,y){
     if(Math.abs(player_x-x) > 50)
         crossed_area = !crossed_area;
+    console.log("started"+crossed_area)    
     player_x = x;
     player_y = y;
 }
 
+function setupRound(){
+    game_state = "set"
+    crossed_area = false
+    status_prompt.innerText = "Don't Touch the Lines!!!"
+}
+
+function startRound(){
+    game_state = "started"
+}
+
+function winGame(){
+    if(game_state == "started"){
+        console.log("you win!!!")
+        game_state = "finished"
+        status_prompt.innerText = "YOU WIN!!!"
+    }
+}
+
+function looseGame(){
+    console.log("dead")
+    game_state = "over" ;
+    status_prompt.innerText = "YOU LOOSE!"
+}
+
 game_container.addEventListener("mousemove" , 
     function(e) {
-        setCoordinates(e.offsetX , e.offsetY) //if game started only
-        if(playerSafe()){
-           console.log("alive")
-        }else{
-            console.log("dead")
+
+        if(game_state == "started"){
+            setCoordinates(e.offsetX , e.offsetY) //if game started only
+            if(!playerSafe()){
+                looseGame()
+            }else{
+                console.log("alive")
+            }
         }
     }
 )
@@ -58,7 +84,20 @@ game_container.addEventListener("mousemove" ,
 
 start.addEventListener( "mouseenter" , 
   function(){  
-     game_state = "started"
+     setupRound()
+  }
+)
+
+start.addEventListener( "mouseleave" , 
+  function(){  
+     startRound()
+  }
+)
+
+
+end.addEventListener("mouseenter" , 
+  function(){
+    winGame()
   }
 )
 
