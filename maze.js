@@ -1,3 +1,5 @@
+document.onload = ""
+
 var start = document.getElementById("start")
 var end = document.getElementById("end")
 var status_prompt = document.getElementById("status")
